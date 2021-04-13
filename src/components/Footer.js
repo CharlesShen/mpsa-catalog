@@ -13,8 +13,8 @@ function Footer() {
           <a target="_blank" href="https://aws.amazon.com/terms/">
             Site terms
           </a>
-          | © 2020, Amazon Web Services, Inc. or its affiliates. All rights
-          reserved.
+          | © {new Date().getFullYear()}, Amazon Web Services, Inc. or its
+          affiliates. All rights reserved.
         </span>
       </div>
     </footer>
