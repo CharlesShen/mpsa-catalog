@@ -57,9 +57,18 @@ function SideBar() {
                 Technical Track
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="partnercast"
+                className="nav-link"
+                activeClassName="active"
+              >
+                PartnerCast
+              </NavLink>
+            </li>
           </ul>
         </nav>
-        <div class="contact">
+        <div className="contact">
           <a
             href="https://partners.awscloud.com/Microsoft-PSA-Request.html"
             target="_blank"

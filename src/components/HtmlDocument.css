@@ -12,9 +12,9 @@ main a:hover {
 }
 
 .edit-quip {
-	text-align: center;
-	font-size: 12px;
-	margin-top: 50px;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 50px;
 }
 
 main {
@@ -234,7 +234,7 @@ td:last-child {
 }
 
 table th {
-  background-color: #067f68;
+  background-color: #067f68 !important;
   font-size: small;
   border-top-style: none !important;
   border-bottom-style: none !important;
@@ -273,6 +273,10 @@ table td.underline.strikethrough {
   text-decoration: underline line-through;
 }
 
+.table-dark td {
+  background-color: #343a40 !important;
+}
+
 /* Images */
 div[data-section-style="11"] {
   margin-top: 20px;
@@ -303,11 +307,6 @@ div[data-section-style="11"] img {
   max-width: 100%;
   height: auto;
   margin: auto;
-}
-
-div[data-section-style="11"].show-border {
-  outline: 1px solid @standardShadowColor;
-  box-shadow: 0 1px 4px 0 @secondaryShadowColor;
 }
 
 hr {

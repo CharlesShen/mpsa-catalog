@@ -5,6 +5,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import SideBar from "./components/SideBar";
 import Footer from "./components/Footer";
 import HtmlDocument from "./components/HtmlDocument";
+import PartnerCast from "./components/PartnerCast";
 
 function App() {
   useEffect(() => {
@@ -42,6 +43,7 @@ function App() {
               path="/odtechnical"
               element={<HtmlDocument location="content/odtechnical.html" />}
             />
+            <Route path="/partnercast" element={<PartnerCast />} />
           </Routes>
         </div>
         <Footer />
