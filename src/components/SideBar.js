@@ -37,8 +37,17 @@ function SideBar() {
               </NavLink>
             </li>
           </ul>
-          <div className="heading">On-Demand Content</div>
+          <div className="heading">Live/On-Demand Content</div>
           <ul>
+            <li>
+              <NavLink
+                to="partnercast"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Upcoming PartnerCasts
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to="odbusiness"
@@ -55,15 +64,6 @@ function SideBar() {
                 activeClassName="active"
               >
                 Technical Track
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="partnercast"
-                className="nav-link"
-                activeClassName="active"
-              >
-                PartnerCast
               </NavLink>
             </li>
           </ul>

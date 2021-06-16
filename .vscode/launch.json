@@ -2,17 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Chrome",
-      "request": "launch",
-      "type": "pwa-chrome",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/src",
-      "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
-      },
-      "userDataDir": false
-    },
-    {
       "name": "Launch Edge",
       "request": "launch",
       "type": "pwa-msedge",
