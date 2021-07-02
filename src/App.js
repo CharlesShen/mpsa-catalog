@@ -21,27 +21,27 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<HtmlDocument location="content/welcome.html" />}
+              element={<HtmlDocument location="/content/welcome.html" />}
             />
             <Route
               path="/platform"
-              element={<HtmlDocument location="content/platform.html" />}
+              element={<HtmlDocument location="/content/platform.html" />}
             />
             <Route
               path="/net"
-              element={<HtmlDocument location="content/net.html" />}
+              element={<HtmlDocument location="/content/net.html" />}
             />
             <Route
               path="/sql"
-              element={<HtmlDocument location="content/sql.html" />}
+              element={<HtmlDocument location="/content/sql.html" />}
             />
             <Route
               path="/odbusiness"
-              element={<HtmlDocument location="content/odbusiness.html" />}
+              element={<HtmlDocument location="/content/odbusiness.html" />}
             />
             <Route
               path="/odtechnical"
-              element={<HtmlDocument location="content/odtechnical.html" />}
+              element={<HtmlDocument location="/content/odtechnical.html" />}
             />
             <Route path="/partnercast" element={<PartnerCast />} />
           </Routes>

@@ -7,7 +7,7 @@ function SideBar() {
     <section id="sidebar">
       <div className="inner">
         <div className="logo">
-          <img src="./logo.svg" />
+          <img src="/logo.svg" />
         </div>
         <nav>
           <div className="heading">Workshops Catalog</div>

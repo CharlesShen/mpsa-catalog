@@ -6,11 +6,7 @@
       "request": "launch",
       "type": "pwa-msedge",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/src",
-      "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
-      },
-      "userDataDir": false
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }
