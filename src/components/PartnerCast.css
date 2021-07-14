@@ -20,3 +20,12 @@ em.date {
 .filters .form-check label {
   font-size: 0.8em;
 }
+
+.badge {
+  font-size: 0.7em;
+  padding: 0.25em 0.5em;
+}
+
+.tags {
+  margin: 0.2em 0;
+}
