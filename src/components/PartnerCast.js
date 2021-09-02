@@ -150,7 +150,7 @@ function PartnerCast() {
   }
 
   return (
-    <div>
+    <div class="partnercast">
       <h2>Upcoming PartnerCast Sessions</h2>
       <div className="filters">
         <div class="heading">Filter Audience</div>
