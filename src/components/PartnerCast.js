@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import Badge from "react-bootstrap/Badge";
 import Form from "react-bootstrap/Form";
-import "./PartnerCast.css";
+import "./PartnerCast.scss";
 
-function PartnerCast() {
-  const [partnercastJson, setPartnercastJson] = React.useState(null);
+function PartnerCast(props) {
+  const [error, setError] = useState(null);
+  const [html, setHtml] = useState(null);
+  const [json, setJson] = React.useState(null);
   const [filters, setFilters] = React.useState({
     audienceBusiness: false,
     audienceTechnical: false,
@@ -13,30 +15,51 @@ function PartnerCast() {
     geoApj: false,
   });
 
-  const getData = () => {
-    fetch("/content/partnercast.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (json) {
-        setPartnercastJson(json);
-      });
-  };
+  // Note: the empty deps array [] means
+  // this useEffect will run once
+  // similar to componentDidMount()
+  useEffect(() => {
+    fetch(props["location-intro"])
+      .then((res) => res.text())
+      .then(
+        (result) => {
+          setHtml(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setError(error);
+        }
+      );
+  }, [props]);
 
   useEffect(() => {
-    getData();
-  }, []);
+    fetch(props["location-data"])
+      .then((res) => res.json(), {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then(
+        (result) => {
+          setJson(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setError(error);
+        }
+      );
+  }, [props]);
 
   function getFilteredSessions() {
     var today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    var upcomingSessions = partnercastJson.data.Sessions.filter(function (x) {
+    var upcomingSessions = json.data.Sessions.filter(function (x) {
       return new Date(x.date) >= today;
     });
 
@@ -149,65 +172,69 @@ function PartnerCast() {
     );
   }
 
-  return (
-    <div class="partnercast">
-      <h2>Upcoming PartnerCast Sessions</h2>
-      <div className="filters">
-        <div class="heading">Filter Audience</div>
-        <div className="mb-3">
-          <Form.Check
-            inline
-            label="Technical"
-            name="audienceTechnical"
-            type="checkbox"
-            checked={filters.audienceTechnical}
-            onChange={handleCheckboxChange}
-          />
-          <Form.Check
-            inline
-            label="Business"
-            name="audienceBusiness"
-            type="checkbox"
-            checked={filters.audienceBusiness}
-            onChange={handleCheckboxChange}
-          />
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else {
+    return (
+      <div class="partnercast">
+        <div className="quip-html" dangerouslySetInnerHTML={{ __html: html }} />
+        <div className="filters">
+          <div class="heading">Filter Audience</div>
+          <div className="mb-3">
+            <Form.Check
+              inline
+              label="Technical"
+              name="audienceTechnical"
+              type="checkbox"
+              checked={filters.audienceTechnical}
+              onChange={handleCheckboxChange}
+            />
+            <Form.Check
+              inline
+              label="Business"
+              name="audienceBusiness"
+              type="checkbox"
+              checked={filters.audienceBusiness}
+              onChange={handleCheckboxChange}
+            />
+          </div>
+          <div class="heading">Filter Geo</div>
+          <div className="mb-3">
+            <Form.Check
+              inline
+              label="N. America (NAMER)"
+              name="geoNamer"
+              type="checkbox"
+              checked={filters.geoNamer}
+              onChange={handleCheckboxChange}
+            />
+            <Form.Check
+              inline
+              label="EMEA"
+              name="geoEmea"
+              type="checkbox"
+              checked={filters.geoEmea}
+              onChange={handleCheckboxChange}
+            />
+            <Form.Check
+              inline
+              label="Asia Pacific (APJ)"
+              name="geoApj"
+              type="checkbox"
+              checked={filters.geoApj}
+              onChange={handleCheckboxChange}
+            />
+          </div>
         </div>
-        <div class="heading">Filter Geo</div>
-        <div className="mb-3">
-          <Form.Check
-            inline
-            label="N. America (NAMER)"
-            name="geoNamer"
-            type="checkbox"
-            checked={filters.geoNamer}
-            onChange={handleCheckboxChange}
-          />
-          <Form.Check
-            inline
-            label="EMEA"
-            name="geoEmea"
-            type="checkbox"
-            checked={filters.geoEmea}
-            onChange={handleCheckboxChange}
-          />
-          <Form.Check
-            inline
-            label="Asia Pacific (APJ)"
-            name="geoApj"
-            type="checkbox"
-            checked={filters.geoApj}
-            onChange={handleCheckboxChange}
-          />
+        <div className="row g-4 row-cols-1 row-cols-lg-1">
+          {json &&
+            getFilteredSessions().map((session, index) => (
+              <Repeat key={index} value={session} />
+            ))}
         </div>
       </div>
-      <div className="row g-4 row-cols-1 row-cols-lg-1">
-        {partnercastJson &&
-          getFilteredSessions().map((session, index) => (
-            <Repeat key={index} value={session} />
-          ))}
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default PartnerCast;

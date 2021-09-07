@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
@@ -6,6 +6,7 @@ import SideBar from "./components/SideBar";
 import Footer from "./components/Footer";
 import HtmlDocument from "./components/HtmlDocument";
 import PartnerCast from "./components/PartnerCast";
+import Workshops from "./components/Workshops";
 
 function App() {
   useEffect(() => {
@@ -24,18 +25,6 @@ function App() {
               element={<HtmlDocument location="/content/welcome.html" />}
             />
             <Route
-              path="/platform"
-              element={<HtmlDocument location="/content/platform.html" />}
-            />
-            <Route
-              path="/net"
-              element={<HtmlDocument location="/content/net.html" />}
-            />
-            <Route
-              path="/sql"
-              element={<HtmlDocument location="/content/sql.html" />}
-            />
-            <Route
               path="/odbusiness"
               element={<HtmlDocument location="/content/odbusiness.html" />}
             />
@@ -43,7 +32,24 @@ function App() {
               path="/odtechnical"
               element={<HtmlDocument location="/content/odtechnical.html" />}
             />
-            <Route path="/partnercast" element={<PartnerCast />} />
+            <Route
+              path="/partnercast"
+              element={
+                <PartnerCast
+                  location-intro="/content/partnercast.html"
+                  location-data="/content/partnercast.json"
+                />
+              }
+            />
+            <Route
+              path="/workshops"
+              element={
+                <Workshops
+                  location-intro="/content/workshops.html"
+                  location-data="/content/workshops.json"
+                />
+              }
+            />
           </Routes>
         </div>
         <Footer />

@@ -1,4 +1,4 @@
-import "./Footer.css";
+import "./Footer.scss";
 import React from "react";
 
 function Footer() {
@@ -9,12 +9,12 @@ function Footer() {
           <a target="_blank" href="https://aws.amazon.com/privacy/">
             Privacy
           </a>
-          |
+          &nbsp;|&nbsp;
           <a target="_blank" href="https://aws.amazon.com/terms/">
             Site terms
           </a>
-          | © {new Date().getFullYear()}, Amazon Web Services, Inc. or its
-          affiliates. All rights reserved.
+          &nbsp;|&nbsp;© {new Date().getFullYear()}, Amazon Web Services, Inc.
+          or its affiliates. All rights reserved.
         </span>
       </div>
     </footer>

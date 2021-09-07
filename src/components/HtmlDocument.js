@@ -1,4 +1,4 @@
-import "./HtmlDocument.css";
+import "./HtmlDocument.scss";
 import React, { useState, useEffect } from "react";
 
 function HtmlDocument(props) {
@@ -34,7 +34,9 @@ function HtmlDocument(props) {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+    return (
+      <div className="quip-html" dangerouslySetInnerHTML={{ __html: html }} />
+    );
   }
 }
 

@@ -1,4 +1,4 @@
-import "./SideBar.css";
+import "./SideBar.scss";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -10,7 +10,7 @@ function SideBar() {
           <img src="/logo.svg" />
         </div>
         <nav>
-          <div className="heading">Workshops Catalog</div>
+          <div className="heading">Content Catalog</div>
           <ul>
             <li>
               <NavLink end to="/" className="nav-link" activeClassName="active">
@@ -19,26 +19,13 @@ function SideBar() {
             </li>
             <li>
               <NavLink
-                to="platform"
+                to="workshops"
                 className="nav-link"
                 activeClassName="active"
               >
-                AWS Platform
+                Workshops
               </NavLink>
             </li>
-            <li>
-              <NavLink to="net" className="nav-link" activeClassName="active">
-                .NET (Core)
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="sql" className="nav-link" activeClassName="active">
-                SQL Server
-              </NavLink>
-            </li>
-          </ul>
-          <div className="heading">Live/On-Demand Content</div>
-          <ul>
             <li>
               <NavLink
                 to="partnercast"
@@ -48,6 +35,9 @@ function SideBar() {
                 Upcoming PartnerCasts
               </NavLink>
             </li>
+          </ul>
+          <div className="heading">On-Demand Content</div>
+          <ul>
             <li>
               <NavLink
                 to="odbusiness"
