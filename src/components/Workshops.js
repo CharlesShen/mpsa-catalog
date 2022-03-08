@@ -190,7 +190,7 @@ function Workshops(props) {
       <div className="workshops">
         <div className="quip-html" dangerouslySetInnerHTML={{ __html: html }} />
         <div className="filters">
-          <div class="heading">Filter Category</div>
+          <div className="heading">Filter Category</div>
           <div className="mb-3">
             <Form.Check
               inline
@@ -217,7 +217,7 @@ function Workshops(props) {
               onChange={handleCheckboxChange}
             />
           </div>
-          <div class="heading">Filter Tags</div>
+          <div className="heading">Filter Tags</div>
           <div className="mb-3">
             <Form.Check
               inline

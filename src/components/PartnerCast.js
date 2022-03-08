@@ -176,10 +176,10 @@ function PartnerCast(props) {
     return <div>Error: {error.message}</div>;
   } else {
     return (
-      <div class="partnercast">
+      <div className="partnercast">
         <div className="quip-html" dangerouslySetInnerHTML={{ __html: html }} />
         <div className="filters">
-          <div class="heading">Filter Audience</div>
+          <div className="heading">Filter Audience</div>
           <div className="mb-3">
             <Form.Check
               inline
@@ -198,7 +198,7 @@ function PartnerCast(props) {
               onChange={handleCheckboxChange}
             />
           </div>
-          <div class="heading">Filter Geo</div>
+          <div className="heading">Filter Geo</div>
           <div className="mb-3">
             <Form.Check
               inline
