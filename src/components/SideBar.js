@@ -13,7 +13,7 @@ function SideBar() {
           <div className="heading">Content Catalog</div>
           <ul>
             <li>
-              <NavLink end to="/" className="nav-link" activeClassName="active">
+              <NavLink end to="/" className="nav-link">
                 Welcome
               </NavLink>
             </li>
@@ -21,7 +21,6 @@ function SideBar() {
               <NavLink
                 to="workshops"
                 className="nav-link"
-                activeClassName="active"
               >
                 Workshops
               </NavLink>
@@ -30,7 +29,6 @@ function SideBar() {
               <NavLink
                 to="partnercast"
                 className="nav-link"
-                activeClassName="active"
               >
                 Upcoming PartnerCasts
               </NavLink>
@@ -42,7 +40,6 @@ function SideBar() {
               <NavLink
                 to="odbusiness"
                 className="nav-link"
-                activeClassName="active"
               >
                 Business Track
               </NavLink>
@@ -51,7 +48,6 @@ function SideBar() {
               <NavLink
                 to="odtechnical"
                 className="nav-link"
-                activeClassName="active"
               >
                 Technical Track
               </NavLink>

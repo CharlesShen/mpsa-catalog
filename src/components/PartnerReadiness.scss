@@ -1,0 +1,33 @@
+.partnerreadiness {
+  h2 {
+    text-align: center;
+  }
+
+  em.date {
+    vertical-align: middle;
+  }
+
+  .filters {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .filters .heading {
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: #ffffff;
+    font-weight: 100;
+  }
+  .filters .form-check label {
+    font-size: 0.8em;
+  }
+
+  .badge {
+    font-size: 0.7em;
+    padding: 0.25em 0.5em;
+  }
+
+  .tags {
+    margin: 0.2em 0;
+  }
+}

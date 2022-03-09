@@ -6,6 +6,7 @@ import SideBar from "./components/SideBar";
 import Footer from "./components/Footer";
 import HtmlDocument from "./components/HtmlDocument";
 import PartnerCast from "./components/PartnerCast";
+import PartnerReadiness from "./components/PartnerReadiness";
 import Workshops from "./components/Workshops";
 
 function App() {
@@ -38,6 +39,15 @@ function App() {
                 <PartnerCast
                   location-intro="/content/partnercast.html"
                   location-data="/content/partnercast.json"
+                />
+              }
+            />
+            <Route
+              path="/partnerreadiness"
+              element={
+                <PartnerReadiness
+                  location-intro="/content/partnerreadiness.html"
+                  location-data="/content/partnerreadiness.json"
                 />
               }
             />
