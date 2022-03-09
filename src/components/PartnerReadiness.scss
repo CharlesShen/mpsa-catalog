@@ -3,13 +3,9 @@
     text-align: center;
   }
 
-  em.date {
-    vertical-align: middle;
-  }
-
   .filters {
     margin-top: 2em;
-    margin-bottom: 2em;
+    margin-bottom: 3em;
   }
 
   .filters .heading {
@@ -22,12 +18,25 @@
     font-size: 0.8em;
   }
 
-  .badge {
-    font-size: 0.7em;
-    padding: 0.25em 0.5em;
+  .category {
+    color: #FF9900;
   }
 
-  .tags {
-    margin: 0.2em 0;
+  .topic {
+    margin: 25px 0;
+
+    h3 {
+      text-decoration: underline;
+    }
+  }
+
+  .product
+  {
+    margin: 10px 25px 20px;
+  }
+
+  .resource
+  {
+    margin: "2px 0";
   }
 }

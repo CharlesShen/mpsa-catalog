@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import Badge from "react-bootstrap/Badge";
 import Form from "react-bootstrap/Form";
 import "./PartnerReadiness.scss";
 
@@ -43,6 +42,25 @@ function PartnerReadiness(props) {
 
           const topics = [...new Set(result.data.Resources.map(item => item.topic))].sort();
           setTopics(topics);
+
+          //check for existence of "filters" parameter and setup initial view
+          try {
+            const urlParameters = new URLSearchParams(window.location.search);
+            if (urlParameters.has("filters")) {
+              const urlFilters = urlParameters.get("filters").split(",");
+
+              const selectedFilters = {};
+              for (var i = 0; i < urlFilters.length; i++) {
+                // check if filter represents a valid topic
+                if (topics.includes(urlFilters[i])) {
+                  selectedFilters[urlFilters[i]] = true;
+                }
+              }
+              setFilters(selectedFilters);
+            }
+          } catch (error) {
+            console.error(error);
+          }
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -53,41 +71,14 @@ function PartnerReadiness(props) {
       );
   }, [props]);
 
-  function getFilteredSessions() {
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    var upcomingSessions = json.data.Sessions.filter(function (x) {
-      return new Date(x.date) >= today;
-    });
-
-    var allAudiences = !filters.audienceTechnical && !filters.audienceBusiness;
-    var allGeos = !filters.geoNamer && !filters.geoEmea && !filters.geoApj;
-
-    var filteredSessions = upcomingSessions.filter(function (x) {
-      return (
-        (allAudiences ||
-          (x.audience == "Technical" && filters.audienceTechnical) ||
-          (x.audience == "Business" && filters.audienceBusiness)) &&
-        (allGeos ||
-          (x.geo.includes("NAMER") && filters.geoNamer) ||
-          (x.geo.includes("EMEA") && filters.geoEmea) ||
-          (x.geo.includes("APJ") && filters.geoApj))
-      );
-    });
-
-    return filteredSessions;
-  }
-
-
   function RepeatCategory(props) {
     return (
       <div>
-        <h2 style={{ color: "#FF9900" }}>{props.category}</h2>
+        <h2 className="category">{props.category}</h2>
         {
           [...new Set(json.data.Resources
             .filter(object => {
-              return object.category === props.category;
+              return object.category === props.category && (Object.keys(filters).length > 0 ? filters[object.topic] : true);
             })
             .map(item => item.topic))]
             .map((item, index) => (
@@ -101,12 +92,12 @@ function PartnerReadiness(props) {
 
   function RepeatTopic(props) {
     return (
-      <div style={{ margin: "25px 0" }}>
-        <h3 style={{ textDecoration: "underline" }}>{props.topic}</h3>
+      <div className="topic">
+        <h3>{props.topic}</h3>
         {
           [...new Set(json.data.Resources
             .filter(object => {
-              return (object.category === props.category && object.topic === props.topic);
+              return (object.category === props.category && object.topic === props.topic && (Object.keys(filters).length > 0 ? filters[object.topic] : true));
             })
             .map(item => item.product))]
             .map((item, index) => (
@@ -119,12 +110,12 @@ function PartnerReadiness(props) {
 
   function RepeatProduct(props) {
     return (
-      <div style={{ margin: "10px 25px 20px" }}>
+      <div className="product">
         <h4>{props.product}</h4>
         {
           json.data.Resources
             .filter(object => {
-              return (object.category === props.category && object.topic === props.topic && object.product === props.product);
+              return (object.category === props.category && object.topic === props.topic && object.product === props.product && (Object.keys(filters).length > 0 ? filters[object.topic] : true));
             })
             .map((item, index) => (
               <RepeatResource key={index} value={item} />
@@ -136,8 +127,8 @@ function PartnerReadiness(props) {
 
   function RepeatResource(props) {
     return (
-      <div style={{ margin: "2px 0" }}>
-        <ResourceIcon resourceType={props.value.resourceType} />&nbsp;<a target="_blank" href={props.value.resourceLink}>{props.value.resourceName}</a>&nbsp;<ResourceMetadata value={props.value} />
+      <div className="resource">
+        <span title={props.value.resourceType}><ResourceIcon resourceType={props.value.resourceType} /></span>&nbsp;<a target="_blank" href={props.value.resourceLink}>{props.value.resourceName}</a>&nbsp;<ResourceMetadata value={props.value} />
       </div>
     );
   }
@@ -221,9 +212,34 @@ function PartnerReadiness(props) {
           name={props.value}
           type="checkbox"
           checked={filters[props.value]}
+          onChange={handleFilterChange}
         />
       </div>
     );
+
+    function handleFilterChange(event) {
+      var filtersCurrentState = null;
+
+      if (event.target.checked) {
+        filtersCurrentState = {
+          ...filters,
+          [event.target.name]: true,
+        }
+      }
+      else {
+        filtersCurrentState = filters;
+        delete filtersCurrentState[event.target.name];
+      }
+
+      setFilters({ ...filtersCurrentState })
+
+      if (Object.keys(filtersCurrentState).length > 0) {
+        window.history.replaceState(filtersCurrentState, "", `${window.location.pathname}?${(new URLSearchParams({ filters: Object.keys(filtersCurrentState).sort() })).toString()}`);
+      }
+      else {
+        window.history.replaceState(null, "", `${window.location.pathname}`);
+      }
+    }
   }
 
   if (error) {
@@ -233,7 +249,7 @@ function PartnerReadiness(props) {
       <div className="partnerreadiness">
         <div className="quip-html" dangerouslySetInnerHTML={{ __html: html }} />
         <div className="filters">
-          <div className="heading">Filter Topic</div>
+          <div className="heading">Filter Topics</div>
           <div className="row">
             {
               topics && topics.map((item, index) => (
@@ -244,9 +260,14 @@ function PartnerReadiness(props) {
         </div>
         <div className="row g-4 row-cols-1 row-cols-lg-1">
           {
-            json && [...new Set(json.data.Resources.map(item => item.category))].map((item, index) => (
-              <RepeatCategory key={index} category={item} />
-            ))
+            json && [...new Set(json.data.Resources
+              .filter(object => {
+                return (Object.keys(filters).length > 0 ? filters[object.topic] : true);
+              })
+              .map(item => item.category))]
+              .map((item, index) => (
+                <RepeatCategory key={index} category={item} />
+              ))
           }
         </div>
       </div>
