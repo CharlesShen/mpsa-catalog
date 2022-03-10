@@ -18,7 +18,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <SideBar />
-      <main role="main" className="mx-auto">
+      <main role="main">
         <div id="content" className="container">
           <Routes>
             <Route

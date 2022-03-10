@@ -81,4 +81,8 @@
   .table-dark td {
     background-color: #343a40 !important;
   }
+
+  .table > :not(:first-child) {
+    border-top: 0px;
+  }
 }

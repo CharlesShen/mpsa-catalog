@@ -13,44 +13,64 @@ function SideBar() {
           <div className="heading">Content Catalog</div>
           <ul>
             <li>
-              <NavLink end to="/" className="nav-link">
-                Welcome
-              </NavLink>
+              <div className="nav-link-container">
+                <NavLink end to="/" className="nav-link">
+                  Welcome
+                </NavLink>
+              </div>
             </li>
             <li>
-              <NavLink
-                to="workshops"
-                className="nav-link"
-              >
-                Workshops
-              </NavLink>
+              <div className="nav-link-container">
+                <NavLink
+                  to="workshops"
+                  className="nav-link"
+                >
+                  Workshops
+                </NavLink>
+              </div>
             </li>
             <li>
-              <NavLink
-                to="partnercast"
-                className="nav-link"
-              >
-                Upcoming PartnerCasts
-              </NavLink>
+              <div className="nav-link-container">
+                <NavLink
+                  to="partnerreadiness"
+                  className="nav-link"
+                >
+                  Partner Readiness
+                </NavLink>
+              </div>
+            </li>
+            <li>
+              <div className="nav-link-container">
+                <NavLink
+                  to="partnercast"
+                  className="nav-link"
+                >
+                  Upcoming PartnerCasts
+                </NavLink>
+              </div>
             </li>
           </ul>
           <div className="heading">On-Demand Content</div>
           <ul>
             <li>
-              <NavLink
-                to="odbusiness"
-                className="nav-link"
-              >
-                Business Track
-              </NavLink>
+              <div className="nav-link-container">
+                <NavLink
+                  to="odbusiness"
+                  className="nav-link"
+                >
+                  Business Track
+                </NavLink>
+              </div>
             </li>
             <li>
-              <NavLink
-                to="odtechnical"
-                className="nav-link"
-              >
-                Technical Track
-              </NavLink>
+              <div className="nav-link-container">
+                <NavLink
+                  to="odtechnical"
+                  className="nav-link"
+                >
+                  Technical Track
+                </NavLink>
+              </div>
             </li>
           </ul>
         </nav>
