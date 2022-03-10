@@ -8,14 +8,17 @@ import HtmlDocument from "./components/HtmlDocument";
 import PartnerCast from "./components/PartnerCast";
 import PartnerReadiness from "./components/PartnerReadiness";
 import Workshops from "./components/Workshops";
+import usePageTracking from "./components/usePageTracking";
 
 function App() {
+  usePageTracking();
+
   useEffect(() => {
     document.body.classList.remove("is-preload");
   }, []);
 
   return (
-    <Router>
+    <div>
       <ScrollToTop />
       <SideBar />
       <main role="main">
@@ -64,7 +67,7 @@ function App() {
         </div>
         <Footer />
       </main>
-    </Router>
+    </div>
   );
 }
 
